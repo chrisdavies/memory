@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Memory</title>
+  <link href="http://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/memory.css?cbh=30b11dd55805f1ff397c119288257af0">
+</head>
+
+<body>
+
+  <!-- View placeholder -->
+  <main>
+  </main>
+
+  <script id="winTemplate" type="text/html">
+    <main class="game-container win-game-container">
+      <div class="game-content win-game-content">
+        <h1 class="win-message">You win!</h1>
+      </div>
+
+      <div class="win-game-banner">
+        <h1 class="main-header">Mem<span class="ico">o</span>ry</h1>
+
+        <ul class="game-stats">
+          <li class="game-stat">
+            <span class="game-stat-name">Errors</span>
+            <span class="game-stat-value">${data.errors}</span>
+          </li>
+          <li class="game-stat">
+            <span class="game-stat-name">Time</span>
+            <span class="game-stat-value">${mem.format.time(data.time)}</span>
+          </li>
+          <li class="game-stat game-stat-score">
+            <span class="game-stat-name">Score</span>
+            <span class="game-stat-value">${data.score}</span>
+          </li>
+        </ul>
+
+        <a class="primary-button index-link" href="#index">New Game</a>
+
+      </div>
+    </main>
+  </script>
+
+  <script id="loseTemplate" type="text/html">
+    <main class="game-container lose-game-container">
+      <div class="game-content lose-game-content">
+        <h1 class="lose-message">Whoops!</h1>
+
+        <p>
+          (You lost.)
+        </p>
+
+        <a class="primary-button index-link" href="#index">New Game</a>
+
+      </div>
+
+    </main>
+  </script>
+
+  <script id="indexTemplate" type="text/html">
+    <main class="game-container new-game-container">
+      <div class="game-content">
+        <h1 class="main-header">Mem<span class="ico">o</span>ry</h1>
+
+        <nav class="menu-container">
+          <h2 class="menu-header">New game</h2>
+          <a class="menu-option easy-game" href="#game">Easy</a>
+          <a class="menu-option hard-game" href="#game">Hard</a>
+        </nav>
+      </div>
+    </main>
+  </script>
+
+  <script id="detailsTemplate" type="text/html">
+    <li class="game-detail game-detail-health">
+      <% _.times(data.lives(), function () { %>h<% }); %>
+    </li>
+    <li class="game-detail game-detail-time">
+      ${mem.format.time(data.time())}</span>
+    </li>
+  </script>
+
+  <script id="gameTemplate" type="text/html">
+    <main class="game-container board-game-container ${data.difficulty}">
+      <h1 class="main-header">Mem<span class="ico">o</span>ry</h1>
+
+      <ul id='game-details' class="game-details">
+      <%= mem.views.detailsTemplate(data.game) %>
+      </ul>
+
+      <div class="game-board">
+        <% _.forEach(data.game.tiles(), function(tile) { %>
+        <label class="game-tile">
+          <input type="checkbox" >
+          <span class="game-card">
+            <span class="game-icon">${tile.value}</span>
+          </span>
+        </label>
+        <% }); %>
+      </div>
+
+    </main>
+  </script>
+
+  <script src="js/vendor.js?cbh=98566b3298ef0a66cb0ddc4e6b2d61e9"></script>
+  <script src="js/app.js?cbh=a5066b7eb867f76cdf4db925403f90fa"></script>
+
+</body>
+
+</html>
